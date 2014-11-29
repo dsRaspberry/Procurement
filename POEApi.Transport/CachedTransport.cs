@@ -37,7 +37,7 @@ namespace POEApi.Transport
 
         public Stream GetStash(int index, string league, bool refresh)
         {
-            string key = string.Format("{0}-{1}-{2}", league, stashKey, index);
+            key = string.Format("{0}-{1}-{2}", string.Join("_", league.Split(Path.GetInvalidFileNameChars())), stashKey, index);
 
             if (refresh && userCacheService.Exists(key))
                 userCacheService.Remove(key);
